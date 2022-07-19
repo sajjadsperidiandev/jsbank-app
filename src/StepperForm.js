@@ -13,6 +13,7 @@ import KYCDetails from "./KYCDetails";
 import NomineeDetail from "./NomineeDetail";
 import RiskProfile from "./RiskProfile";
 import DocsDetail from "./DocsDetail";
+import Footer from "./Footer";
 function StepperForm() {
   const [key, setKey] = useState(1);
   const [formObj, setformObj] = useState({
@@ -179,7 +180,7 @@ function StepperForm() {
             </div>
           </div>
           <div className="wizard">
-            <div className="wizard-inner">
+            <div className="wizard-inner container">
               <div className="connecting-line"></div>
 
               <Tabs
@@ -435,6 +436,7 @@ function StepperForm() {
           </div>
         </div>
       </header>
+      <Footer/>
     </div>
   );
 }

@@ -22,6 +22,7 @@ html {
   background-repeat: no-repeat !important;
   background: var(--primary-color);
   background-size: 100% 100%;
+  background-image: url('/src/assets/images/bg1.jpg');
   min-height: 100vh;
   padding: 90px 3.5% 20px 3.5%;
   display: -webkit-box;
@@ -291,7 +292,7 @@ button:focus,
     height: 2px;
     background: #e0e0e0;
     position: absolute;
-    width: 53%;
+    width: 50%;
     margin-left: auto;
     left: 0;
     right: 85px;
@@ -338,7 +339,7 @@ span.round-tab i {
 }
 
 .wizard .nav-tabs > li {
-  width: 11%;
+  width: 12%;
 }
 
 .wizard li:after {
@@ -390,6 +391,7 @@ span.round-tab i {
 .wizard .tab-pane {
   position: relative;
   padding-top: 20px;
+  /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
 }
 
 .wizard h3 {
@@ -582,6 +584,7 @@ input[type="checkbox"]:checked::before {
   /* display: flex;
   justify-content: space-around;
   align-items: center; */
+  height: 100px;
 }
 .logo {
   width: 30%;
@@ -648,7 +651,7 @@ footer {
   z-index: 9;
 } */
 
-.sosil-icon i {
+.sosil-icon  {
   background-color: #000;
   color: #fff;
   width: 30px;
@@ -656,9 +659,8 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 20px;
-  padding: 10px 10px;
-  font-size: 20px;
+  border-radius: 50px;
+  margin: 0 5px;
 }
 
 .footer-sosil-icon {
@@ -710,4 +712,16 @@ select {
 
 .w-30{
     width: 30%;
+}
+
+.tab-content{
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+  padding: 0 20px;
+
+}
+
+.form-height-scroll{
+  height: 100vh;
+  overflow-y: auto;
+  position: relative;
 }

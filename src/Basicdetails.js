@@ -932,7 +932,7 @@ function Basicdetails({
       </div>
       {!isPreview ? (
         <ul className="list-inline pull-right">
-          <li>
+          {/* <li>
             <button
               type="button"
               className="default-btn prev-step"
@@ -940,8 +940,7 @@ function Basicdetails({
             >
               Back
             </button>
-          </li>
-          <li></li>
+          </li> */}
           <li>
             <button
               type="button"

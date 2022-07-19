@@ -99,7 +99,7 @@ function NomineeDetail({
                             onChange={(e) => handleChange(e, "nomineeDetail", "relationship")}
                             value={detailObject.relationship} disabled={isPreview ? true : false}
                           >
-                            <option value disabled="disabled">
+                            <option value='' disabled="disabled">
                               Select Relationship
                             </option>
                             <option value="Brother">Brother</option>
