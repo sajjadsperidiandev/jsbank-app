@@ -719,9 +719,10 @@ select {
   padding: 0 20px;
 
 }
-
-.form-height-scroll{
-  height: 100vh;
-  overflow-y: auto;
-  position: relative;
+@media only screen and (min-width: 769px) { 
+  .form-height-scroll{
+    height: 100vh;
+    overflow-y: auto;
+    position: relative;
+  }
 }
