@@ -20,9 +20,9 @@ html {
 .imgfom {
   background-size: cover !important;
   background-repeat: no-repeat !important;
-  background: var(--primary-color);
+  /* background: var(--primary-color); */
   background-size: 100% 100%;
-  background-image: url('/src/assets/images/bg1.jpg');
+  /* background-image: url('/src/assets/images/bg1.jpg'); */
   min-height: 100vh;
   padding: 90px 3.5% 20px 3.5%;
   display: -webkit-box;
@@ -716,7 +716,7 @@ select {
 
 .tab-content{
   box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
-  padding: 0 20px;
+  padding: 20px 20px;
 
 }
 @media only screen and (min-width: 769px) { 

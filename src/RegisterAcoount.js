@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Form } from "react-bootstrap";
 import logo from "./assets/images/logo1.png";
+import bg from "./assets/images/bg1.jpg";
 
 function RegisterAcoount() {
     const [registeraccnt, setRegisteraccnt] = useState({
@@ -13,15 +14,20 @@ function RegisterAcoount() {
         accountType:''
     }) 
 
-    useEffect(() => {
+    // useEffect(() => {
+    //   console.log(registeraccnt);
+    // }, [registeraccnt])
+
+    const submitAccountDetails = (e)=>{
+      e.preventDefault();
       console.log(registeraccnt);
-    }, [registeraccnt])
+    }
     
   return (
     <div className="container-flude">
       <div className="row">
         <div className="col-lg-6">
-          <div className="imgfom">
+          <div className="imgfom" style={{backgroundImage:`url(${bg})`}}>
             <div className="form-logo">
               <img src={logo} alt="logo" />
             </div>
@@ -69,7 +75,7 @@ function RegisterAcoount() {
                     </p>
                   </div>
 
-                  <Form className="">
+                  <Form className="" onSubmit={(e)=>submitAccountDetails(e)}>
                     <div className="row">
                       <div className="col-lg-6">
                         <div

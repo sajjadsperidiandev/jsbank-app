@@ -9,134 +9,85 @@ import Basicdetails from "./Basicdetails.js";
 
 import Accordion from "react-bootstrap/Accordion";
 import TransactionDetails from "./TransactionDetails";
-import KYCDetails from "./KYCDetails";
+// import KYCDetails from "./KYCDetails";
 import NomineeDetail from "./NomineeDetail";
 import RiskProfile from "./RiskProfile";
 import DocsDetail from "./DocsDetail";
 import Footer from "./Footer";
+import {
+  alphabetRegex,
+  dateFormat,
+  limitRegex,
+  transactionDetail,
+  setupProfile,
+  nomineeDetail,
+  riskProfile,
+  uploaddocumentsdetail,
+  cnicRegex,
+  employmentDetail,
+} from "./utils";
+import EmploymentDetails from "./EmploymentDetails";
+
 function StepperForm() {
   const [key, setKey] = useState(1);
   const [formObj, setformObj] = useState({
-    setupProfile: {
-      fullName: "",
-      guadrianName: "",
-      motherName: "",
-      documentType: "",
-      documentNumber: "",
-      issuanceDate: "",
-      lifeTimeExpiry: "",
-      expiryDate: "",
-      dob: "",
-      placeofBirth: "",
-      gender: "",
-      religion: "",
-      martialStatus: "",
-      residentialStaus: "",
-      permanetResidentinPK: "",
-      nationality: "",
-      country: "",
-      otherNationalityBool: "",
-      otherNationality: "",
-      greencardHolder: "",
-      usResident: "",
-      taxResident: "",
-      residentialAddress: "",
-      mailingAddress: "",
-      email: "",
-      phone: "",
-      region: "",
-      city: "",
-      zipcode: "",
-      telnoRes: "",
-      telnoOff: "",
-      taxStatus: "",
-      ntnNo: "",
-    },
-    professionalDetail: {
-      education: "",
-      occupation: "",
-      sourceOfFund: "",
-      monthlyIncome: "",
-      modeofTransaction: "",
-      noofTransactions: "",
-      annualIncome: "",
-      expectedTurnOver: "",
-    },
-    kycDetail: {
-      otherNAtionality: "",
-      notPartoffatf: "",
-      offShoreAccounts: "",
-      refusedToopenuraccount: "",
-      dealWithHighItem: "",
-      residentInAfghanOrSPunjab: "",
-      profilePosition: "",
-      actingBehalfonOther: "",
-      pep: "",
-      relationwithPep: "",
-      customerrefusedToopenuraccount: "",
-      openingAccountbehlfonOther: "",
-      postioninGovt: "",
-      postioninPoliticalParty: "",
-      titleofAcct: "",
-      cnic: "",
-      countryResidence: "",
-      placeofBirth: "",
-      USCitizen: "",
-      USResident: "",
-      greencardHolder: "",
-      otherNationalityBool: "",
-      otherNationality: "",
-      taxObligationOtherBool: "",
-      taxObligationOther: "",
-      overseasPowerOfAttorney: "",
-      addressPowerOfAttorney: "",
-      terms_condition_bool: "",
-      name: "",
-      businessName: "",
-      fedralTaxClassfication: "",
-      payeeCode: "",
-      FatcaReportingCode: "",
-      residentialAddress: "",
-      region: "",
-      city: "",
-      zipcode: "",
-      accountNumber: "",
-      tinnumber: "",
-    },
-    nomineeDetail: {
-      name: "",
-      guardianName: "",
-      cnic: "",
-      email: "",
-      mailingAddress: "",
-      phone: "",
-      relationship: "",
-    },
-    riskProfile: {
-      schemeCode: "",
-      assetAllocation: "",
-      mediumvolatilityBalance: "",
-      lowvolatilityBalance: "",
-      lowervolatilityBalance: "",
-    },
-
-    uploaddocumentsdetail: {
-      idDocType: "",
-      idDocFrontCopy: {},
-      idDocBackCopy: "",
-      SourceofIncomeCopy: "",
-      nomineeCnicCopy: "",
-      w8FormCopy: "",
-      businessEmpProofCopy: "",
-      digitalSignCopy: "",
-      utilityBillCopy: "",
-    },
+    setupProfile: setupProfile,
+    transactionDetail: transactionDetail,
+    // kycDetail:kycDetail,
+    nomineeDetail: nomineeDetail,
+    riskProfile: riskProfile,
+    employmentDetail:employmentDetail,
+    uploaddocumentsdetail: uploaddocumentsdetail,
   });
 
-  const continueStepEvent = () => {
-    let index = parseInt(key) + 1;
-    setKey(index);
+  const checkvalidation = (objectkey) => {
+    let formobjArray = Object.keys(formObj[objectkey]);
+    let bool;
+    formobjArray.every((obj, index) => {
+      let item = formObj[objectkey][obj];
+
+      if (item.type == "Alphabets") {
+        let bool = alphabetRegex(item.value);
+        if (!bool) {
+          alert(`Numbers or Characters are not allowed in ${item.label}`);
+          return bool;
+        }
+      }
+      if (item.type == "NumericWithHypen") {
+        let bool = cnicRegex(item.value);
+        if (!bool) {
+          alert(`CNIC NO must be in this format : XXXXX-XXXXXXX-X`);
+          return bool;
+        }
+      }
+      if (item.limit) {
+        let bool = limitRegex(item.value, item?.min ? item.min : 1, item.limit);
+        if (!bool) {
+          let msg = item.min
+            ? `${item.label} min limit is ${item.min} & max limit is ${item.limit}`
+            : `${item.label} max limit is ${item.limit}`;
+          alert(msg);
+          return bool;
+        }
+      }
+      if (formobjArray.length - 1 == index) {
+        bool = true;
+      }
+
+      return true;
+    });
+    return bool;
   };
+
+  const continueStepEvent = (objectkey) => {
+    if (checkvalidation(objectkey)) {
+      let index = parseInt(key) + 1;
+      setKey(index);
+    } else {
+      // alert('Validation error')
+    }
+  };
+
   const backStepEvent = () => {
     let index = parseInt(key) - 1;
     setKey(index);
@@ -147,11 +98,14 @@ function StepperForm() {
       ...formObj,
       [object]: {
         ...formObj[object],
-        [key]: e.target?.files
-          ? e.target.files[0]
-          : e?.target?.value
-          ? e.target.value
-          : e,
+        [key]: {
+          ...formObj[object][key],
+          value: e.target?.files
+            ? e.target.files[0]
+            : e?.target?.type ==="checkbox"
+            ? e.target.checked
+            : e.target.value,
+        },
       },
     });
   };
@@ -159,6 +113,7 @@ function StepperForm() {
   useEffect(() => {
     console.log(formObj);
   }, [formObj]);
+  
   return (
     <div>
       <header>
@@ -225,12 +180,12 @@ function StepperForm() {
                   eventKey={3}
                   title={
                     <>
-                      <span className="tab-title">KYC</span>
-                      <span className="round-tab">3 </span>
+                      <span className="tab-title">Employmnet Details</span>
+                      <span className="round-tab">3</span>
                     </>
                   }
                 >
-                  <KYCDetails
+                  <EmploymentDetails
                     formObj={formObj}
                     handleChange={handleChange}
                     backStepEvent={backStepEvent}
@@ -253,7 +208,7 @@ function StepperForm() {
                     continueStepEvent={continueStepEvent}
                   />
                 </Tab>
-                <Tab
+                {/* <Tab
                   eventKey={5}
                   title={
                     <>
@@ -268,13 +223,13 @@ function StepperForm() {
                     backStepEvent={backStepEvent}
                     continueStepEvent={continueStepEvent}
                   />
-                </Tab>
+                </Tab> */}
                 <Tab
-                  eventKey={6}
+                  eventKey={5}
                   title={
                     <>
                       <span className="tab-title">Upload Documents</span>
-                      <span className="round-tab">6 </span>
+                      <span className="round-tab">5 </span>
                     </>
                   }
                 >
@@ -286,11 +241,11 @@ function StepperForm() {
                   />
                 </Tab>
                 <Tab
-                  eventKey={7}
+                  eventKey={6}
                   title={
                     <>
                       <span className="tab-title">Preview</span>
-                      <span className="round-tab">7 </span>
+                      <span className="round-tab">6</span>
                     </>
                   }
                 >
@@ -305,7 +260,8 @@ function StepperForm() {
                             formObj={formObj}
                             handleChange={handleChange}
                             backStepEvent={backStepEvent}
-                            continueStepEvent={continueStepEvent} isPreview={true}
+                            continueStepEvent={continueStepEvent}
+                            isPreview={true}
                           />
                         </Accordion.Body>
                       </Accordion.Item>
@@ -316,18 +272,8 @@ function StepperForm() {
                             formObj={formObj}
                             handleChange={handleChange}
                             backStepEvent={backStepEvent}
-                            continueStepEvent={continueStepEvent} isPreview={true}
-                          />
-                        </Accordion.Body>
-                      </Accordion.Item>
-                      <Accordion.Item eventKey="2">
-                        <Accordion.Header>KYC</Accordion.Header>
-                        <Accordion.Body>
-                          <KYCDetails
-                            formObj={formObj}
-                            handleChange={handleChange}
-                            backStepEvent={backStepEvent}
-                            continueStepEvent={continueStepEvent} isPreview={true}
+                            continueStepEvent={continueStepEvent}
+                            isPreview={true}
                           />
                         </Accordion.Body>
                       </Accordion.Item>
@@ -338,11 +284,12 @@ function StepperForm() {
                             formObj={formObj}
                             handleChange={handleChange}
                             backStepEvent={backStepEvent}
-                            continueStepEvent={continueStepEvent} isPreview={true}
+                            continueStepEvent={continueStepEvent}
+                            isPreview={true}
                           />
                         </Accordion.Body>
                       </Accordion.Item>
-                      <Accordion.Item eventKey="4">
+                      {/* <Accordion.Item eventKey="4">
                         <Accordion.Header>Risk Profile</Accordion.Header>
                         <Accordion.Body>
                           <RiskProfile
@@ -352,7 +299,7 @@ function StepperForm() {
                             continueStepEvent={continueStepEvent} isPreview={true}
                           />
                         </Accordion.Body>
-                      </Accordion.Item>
+                      </Accordion.Item> */}
                       <Accordion.Item eventKey="5">
                         <Accordion.Header>Upload Documents</Accordion.Header>
                         <Accordion.Body>
@@ -360,7 +307,8 @@ function StepperForm() {
                             formObj={formObj}
                             handleChange={handleChange}
                             backStepEvent={backStepEvent}
-                            continueStepEvent={continueStepEvent} isPreview={true}
+                            continueStepEvent={continueStepEvent}
+                            isPreview={true}
                           />
                         </Accordion.Body>
                       </Accordion.Item>
@@ -398,11 +346,11 @@ function StepperForm() {
                   </div>
                 </Tab>
                 <Tab
-                  eventKey={8}
+                  eventKey={7}
                   title={
                     <>
                       <span className="tab-title">Finish</span>
-                      <span className="round-tab">8 </span>
+                      <span className="round-tab">7</span>
                     </>
                   }
                 >
@@ -436,7 +384,7 @@ function StepperForm() {
           </div>
         </div>
       </header>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

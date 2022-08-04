@@ -1,4 +1,5 @@
 import React from "react";
+import { Form } from "react-bootstrap";
 
 function DocsDetail({
   continueStepEvent,
@@ -8,8 +9,15 @@ function DocsDetail({
 }) {
   const detailObject = formObj.uploaddocumentsdetail;
 
+  const continueFormEvent = (e)=>{
+    e.preventDefault();
+    continueStepEvent('uploaddocumentsdetail')
+  }
+
   return (
     <div className="tab-pane" role="tabpanel" id="step7">
+                  <Form onSubmit={(e) => continueFormEvent(e)}>
+
       <h4 className="">Upload Documents</h4>
       <div className="row">
         <div className="col-md-6">
@@ -21,7 +29,7 @@ function DocsDetail({
               disabled={isPreview ? true : false}
               className="form-control custom-select"
               style={{ backgroundPositionX: "500px" }}
-              value={detailObject.idDocType}
+              value={detailObject.idDocType.value}
               onChange={(e) =>
                 handleChange(e, "uploaddocumentsdetail", "idDocType")
               }
@@ -53,9 +61,9 @@ function DocsDetail({
                 }
               />
               <label className="custom-file-label">
-                {detailObject?.idDocFrontCopy?.name ? (
-                  <a href={URL.createObjectURL(detailObject?.idDocFrontCopy)}>
-                    {detailObject?.idDocFrontCopy?.name}
+                {detailObject?.idDocFrontCopy?.value.name ? (
+                  <a href={URL.createObjectURL(detailObject?.idDocFrontCopy.value)}>
+                    {detailObject?.idDocFrontCopy?.value.name}
                   </a>
                 ) : (
                   "Select scan copy (JPG, PNG or TIFF file)"
@@ -78,9 +86,9 @@ function DocsDetail({
               }
             />
             <label className="custom-file-label">
-              {detailObject?.idDocBackCopy?.name ? (
-                <a href={URL.createObjectURL(detailObject?.idDocBackCopy)}>
-                  {detailObject?.idDocBackCopy?.name}
+              {detailObject?.idDocBackCopy.value?.name ? (
+                <a href={URL.createObjectURL(detailObject?.idDocBackCopy.value)}>
+                  {detailObject?.idDocBackCopy.value?.name}
                 </a>
               ) : (
                 ""
@@ -103,11 +111,11 @@ function DocsDetail({
                 }
               />
               <label className="custom-file-label">
-                {detailObject?.SourceofIncomeCopy?.name ? (
+                {detailObject?.SourceofIncomeCopy.value?.name ? (
                   <a
-                    href={URL.createObjectURL(detailObject?.SourceofIncomeCopy)}
+                    href={URL.createObjectURL(detailObject?.SourceofIncomeCopy.value)}
                   >
-                    {detailObject?.SourceofIncomeCopy?.name}
+                    {detailObject?.SourceofIncomeCopy.value?.name}
                   </a>
                 ) : (
                   ""
@@ -132,9 +140,9 @@ function DocsDetail({
                 }
               />
               <label className="custom-file-label">
-                {detailObject?.nomineeCnicCopy?.name ? (
-                  <a href={URL.createObjectURL(detailObject?.nomineeCnicCopy)}>
-                    {detailObject?.nomineeCnicCopy?.name}
+                {detailObject?.nomineeCnicCopy.value?.name ? (
+                  <a href={URL.createObjectURL(detailObject?.nomineeCnicCopy.value)}>
+                    {detailObject?.nomineeCnicCopy.value?.name}
                   </a>
                 ) : (
                   ""
@@ -160,9 +168,9 @@ function DocsDetail({
               />
 
               <label className="custom-file-label">
-                {detailObject?.w8FormCopy?.name ? (
-                  <a href={URL.createObjectURL(detailObject?.w8FormCopy)}>
-                    {detailObject?.w8FormCopy?.name}
+                {detailObject?.w8FormCopy.value?.name ? (
+                  <a href={URL.createObjectURL(detailObject?.w8FormCopy.value)}>
+                    {detailObject?.w8FormCopy.value?.name}
                   </a>
                 ) : (
                   ""
@@ -191,13 +199,13 @@ function DocsDetail({
                 }
               />
               <label className="custom-file-label">
-                {detailObject?.businessEmpProofCopy?.name ? (
+                {detailObject?.businessEmpProofCopy.value?.name ? (
                   <a
                     href={URL.createObjectURL(
-                      detailObject?.businessEmpProofCopy
+                      detailObject?.businessEmpProofCopy.value
                     )}
                   >
-                    {detailObject?.businessEmpProofCopy?.name}
+                    {detailObject?.businessEmpProofCopy.value?.name}
                   </a>
                 ) : (
                   ""
@@ -222,9 +230,9 @@ function DocsDetail({
                 }
               />
               <label className="custom-file-label">
-                {detailObject?.digitalSignCopy?.name ? (
-                  <a href={URL.createObjectURL(detailObject?.digitalSignCopy)}>
-                    {detailObject?.digitalSignCopy?.name}
+                {detailObject?.digitalSignCopy.value?.name ? (
+                  <a href={URL.createObjectURL(detailObject?.digitalSignCopy.value)}>
+                    {detailObject?.digitalSignCopy.value?.name}
                   </a>
                 ) : (
                   ""
@@ -249,9 +257,9 @@ function DocsDetail({
                 }
               />
               <label className="custom-file-label">
-                {detailObject?.utilityBillCopy?.name ? (
-                  <a href={URL.createObjectURL(detailObject?.utilityBillCopy)}>
-                    {detailObject?.utilityBillCopy?.name}
+                {detailObject?.utilityBillCopy.value?.name ? (
+                  <a href={URL.createObjectURL(detailObject?.utilityBillCopy.value)}>
+                    {detailObject?.utilityBillCopy.value?.name}
                   </a>
                 ) : (
                   ""
@@ -277,15 +285,15 @@ function DocsDetail({
     </li>
     <li>
       <button
-        type="button"
+        type="submit"
         className="default-btn next-step"
-        onClick={continueStepEvent}
       >
         Continue
       </button>
     </li>
   </ul> : ''  
     }
+    </Form>
     </div>
   );
 }
