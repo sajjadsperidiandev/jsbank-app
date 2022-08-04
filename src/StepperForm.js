@@ -224,7 +224,7 @@ function StepperForm() {
                     continueStepEvent={continueStepEvent}
                   />
                 </Tab> */}
-                <Tab
+                {/* <Tab
                   eventKey={5}
                   title={
                     <>
@@ -239,13 +239,13 @@ function StepperForm() {
                     backStepEvent={backStepEvent}
                     continueStepEvent={continueStepEvent}
                   />
-                </Tab>
+                </Tab> */}
                 <Tab
-                  eventKey={6}
+                  eventKey={5}
                   title={
                     <>
                       <span className="tab-title">Preview</span>
-                      <span className="round-tab">6</span>
+                      <span className="round-tab">5</span>
                     </>
                   }
                 >
@@ -277,6 +277,18 @@ function StepperForm() {
                           />
                         </Accordion.Body>
                       </Accordion.Item>
+                      <Accordion.Item eventKey="2">
+                        <Accordion.Header>Employment Details</Accordion.Header>
+                        <Accordion.Body>
+                          <EmploymentDetails
+                            formObj={formObj}
+                            handleChange={handleChange}
+                            backStepEvent={backStepEvent}
+                            continueStepEvent={continueStepEvent}
+                            isPreview={true}
+                          />
+                        </Accordion.Body>
+                      </Accordion.Item>
                       <Accordion.Item eventKey="3">
                         <Accordion.Header>Nominee Details</Accordion.Header>
                         <Accordion.Body>
@@ -300,7 +312,7 @@ function StepperForm() {
                           />
                         </Accordion.Body>
                       </Accordion.Item> */}
-                      <Accordion.Item eventKey="5">
+                      {/* <Accordion.Item eventKey="5">
                         <Accordion.Header>Upload Documents</Accordion.Header>
                         <Accordion.Body>
                           <DocsDetail
@@ -311,7 +323,7 @@ function StepperForm() {
                             isPreview={true}
                           />
                         </Accordion.Body>
-                      </Accordion.Item>
+                      </Accordion.Item> */}
                     </Accordion>
 
                     <ul className="list-inline pull-right">
@@ -346,11 +358,11 @@ function StepperForm() {
                   </div>
                 </Tab>
                 <Tab
-                  eventKey={7}
+                  eventKey={6}
                   title={
                     <>
                       <span className="tab-title">Finish</span>
-                      <span className="round-tab">7</span>
+                      <span className="round-tab">6</span>
                     </>
                   }
                 >

@@ -27,23 +27,7 @@ function NomineeDetail({
               value={detailObject.name.value}
               onChange={(e) => handleChange(e, "nomineeDetail", "name")}
               type="text"
-              name="NAME (MR./MS./MRS.)"
               placeholder="Enter Name (Mr./Ms./Mrs.)"
-              disabled={isPreview ? true : false}
-            />
-          </div>
-        </div>
-
-        <div className="col-md-4">
-          <div className="form-group">
-            <label>FATHER / HUSBAND NAME *</label>
-            <input
-              value={detailObject.guardianName.value}
-              onChange={(e) => handleChange(e, "nomineeDetail", "guardianName")}
-              className="form-control"
-              type="text"
-              name="Father / Husband Name"
-              placeholder="Enter Father / Husband Name"
               disabled={isPreview ? true : false}
             />
           </div>
@@ -64,33 +48,17 @@ function NomineeDetail({
             />
           </div>
         </div>
-        <div className="col-md-4">
-          <div className="form-group">
-            <label>EMAIL ADDRESS *</label>
-            <input
-              value={detailObject.email.value}
-              onChange={(e) => handleChange(e, "nomineeDetail", "email")}
-              className="form-control"
-              type="email"
-              name="EMAIL ADDRESS"
-              placeholder="Enter Email Address."
-              disabled={isPreview ? true : false}
-            />
-          </div>
-        </div>
 
         <div className="col-md-4">
           <div className="form-group">
-            <label>MAILING ADDRESS *</label>
+            <label>Nominee Relation*</label>
             <input
-              value={detailObject.mailingAddress.value}
-              onChange={(e) =>
-                handleChange(e, "nomineeDetail", "mailingAddress")
-              }
+              onChange={(e) => handleChange(e, "nomineeDetail", "relation")}
+              value={detailObject.relation.value}
               className="form-control"
-              type="email"
-              name="MAILING ADDRESS"
-              placeholder="Enter Mailing Address"
+              type="text" 
+               required
+              placeholder="Nominee Relation"
               disabled={isPreview ? true : false}
             />
           </div>
@@ -100,8 +68,8 @@ function NomineeDetail({
           <div className="form-group">
             <label>PHONE NUMBER *</label>
             <input
-              value={detailObject.phone.value}
-              onChange={(e) => handleChange(e, "nomineeDetail", "phone")}
+              value={detailObject.mobile.value}
+              onChange={(e) => handleChange(e, "nomineeDetail", "mobile")}
               className="form-control"
               type="number"
               name="PHONE NUMBER"
@@ -113,29 +81,66 @@ function NomineeDetail({
 
         <div className="col-md-4">
           <div className="form-group">
-            <label>RELATIONSHIP*</label>
-            <select
-              name=""
-              id=""
-              className="form-control custom-select"
-              onChange={(e) => handleChange(e, "nomineeDetail", "relationship")}
-              value={detailObject.relationship.value}
+            <label>FATHER NAME *</label>
+            <input
+              value={detailObject.fatherName.value}
+              onChange={(e) => handleChange(e, "nomineeDetail", "fatherName")}
+              className="form-control"
+              type="text"
+              name="Father Name"
+              placeholder="Enter Father Name"
               disabled={isPreview ? true : false}
-            >
-              <option value="" disabled="disabled">
-                Select Relationship
-              </option>
-              <option value="Brother">Brother</option>
-              <option value="Daughter">Daughter</option>
-              <option value="Father">Father</option>
-              <option value="Husband">Husband</option>
-              <option value="Mother">Mother</option>
-              <option value="Sister">Sister</option>
-              <option value="Son">Son</option>
-              <option value="Wife">Wife</option>
-            </select>
+            />
           </div>
         </div>
+
+
+        <div className="col-md-4">
+          <div className="form-group">
+            <label>ADDRESS *</label>
+            <input
+              value={detailObject.address.value}
+              onChange={(e) => handleChange(e, "nomineeDetail", "address")}
+              className="form-control"
+              type="text"
+              placeholder="Enter Address."
+              disabled={isPreview ? true : false}
+            />
+          </div>
+        </div>
+
+        <div className="col-md-4">
+          <div className="form-group">
+            <label>Email *</label>
+            <input
+              value={detailObject.email.value}
+              onChange={(e) =>
+                handleChange(e, "nomineeDetail", "email")
+              }
+              className="form-control"
+              type="email"
+              placeholder="Enter Email"
+              disabled={isPreview ? true : false}
+            />
+          </div>
+        </div>
+       
+        <div className="col-md-4">
+          <div className="form-group">
+            <label>Share % of Nominee *</label>
+            <input
+              value={detailObject.sharePerc.value}
+              onChange={(e) =>
+                handleChange(e, "nomineeDetail", "sharePerc")
+              }
+              className="form-control"
+              type="text"
+              placeholder="Enter Share %"
+              disabled={isPreview ? true : false}
+            />
+          </div>
+        </div>
+        
       </div>
       {!isPreview ? (
         <ul className="list-inline pull-right">

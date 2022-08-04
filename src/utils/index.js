@@ -108,22 +108,25 @@ export const nomineeDetail = {
     limit: 100,
     label: "Name",
   },
-  guardianName: {
+  cnic: { value: "", type: "NumericWithHypen", limit: 15, label: "CNIC No" },
+  relation: { value: "" },
+  mobile: { value: "", type: "Numeric", limit: 16, label: "Phone" },
+
+  fatherName: {
     value: "",
     type: "Alphabets",
     limit: 100,
-    label: "Guardian Name",
+    label: "Father Name",
   },
-  cnic: { value: "", type: "NumericWithHypen", limit: 15, label: "CNIC No" },
-  email: { value: "", type: "Alphanumeric", limit: 25, label: "Email" },
-  mailingAddress: {
+  address: {
     value: "",
     type: "Alphanumeric",
     limit: 500,
-    label: "Residential Address",
+    label: "Address",
   },
-  phone: { value: "", type: "Numeric", limit: 16, label: "Phone" },
-  relationship: { value: "" },
+  email: { value: "", type: "Alphanumeric", limit: 25, label: "Email" },
+  sharePerc: { value: "", },
+
 };
 
 export const riskProfile = {
